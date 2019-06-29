@@ -6,8 +6,8 @@
 package main
 
 import (
-	"github.com/Lebonesco/go-compiler/lexer"
-	"github.com/Lebonesco/go-compiler/token"
+	"github.com/tabby-lang/tc/lexer"
+	"github.com/tabby-lang/tc/token"
 	"testing"
 )
 

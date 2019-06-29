@@ -11,7 +11,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/Lebonesco/go-compiler/ast"
+	"github.com/tabby-lang/tc/ast"
 )
 
 func TestAST(t *testing.T) {

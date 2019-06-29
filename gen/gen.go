@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/Lebonesco/go-compiler/ast"
-	. "github.com/Lebonesco/go-compiler/checker"
+	"github.com/tabby-lang/tc/ast"
+	. "github.com/tabby-lang/tc/checker"
 )
 
 var TMP_COUNT int

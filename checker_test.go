@@ -6,10 +6,10 @@
 package main
 
 import (
-	"github.com/Lebonesco/go-compiler/ast"
-	"github.com/Lebonesco/go-compiler/checker"
-	"github.com/Lebonesco/go-compiler/lexer"
-	"github.com/Lebonesco/go-compiler/parser"
+	"github.com/tabby-lang/tc/ast"
+	"github.com/tabby-lang/tc/checker"
+	"github.com/tabby-lang/tc/lexer"
+	"github.com/tabby-lang/tc/parser"
 	"testing"
 )
 

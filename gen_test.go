@@ -6,7 +6,7 @@
 package main
 
 import (
-	"github.com/Lebonesco/go-compiler/gen"
+	"github.com/tabby-lang/tc/gen"
 	"strings"
 	"testing"
 )

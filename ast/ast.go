@@ -7,7 +7,7 @@ package ast
 
 import (
 	"fmt"
-	"github.com/Lebonesco/go-compiler/token"
+	"github.com/tabby-lang/tc/token"
 )
 
 // interface methods

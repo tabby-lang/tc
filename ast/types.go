@@ -5,7 +5,7 @@
 
 package ast
 
-import "github.com/Lebonesco/go-compiler/token"
+import "github.com/tabby-lang/tc/token"
 
 // every element is an Attrib
 type Attrib interface{}

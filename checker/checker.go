@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/Lebonesco/go-compiler/ast"
+	"github.com/tabby-lang/tc/ast"
 )
 
 func Checker(program *ast.Program) error {
