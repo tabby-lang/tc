@@ -6,9 +6,10 @@
 package main
 
 import (
-	"github.com/tabby-lang/tc/gen"
 	"strings"
 	"testing"
+
+	"github.com/tabby-lang/tc/gen"
 )
 
 func TestGen(t *testing.T) {
@@ -126,7 +127,7 @@ func TestGen(t *testing.T) {
 		code := gen.GenWrapper(program)
 		codeString := code.String()
 		// remove spaces for comparison
-		for _, rep := range []string{" ", "\n", "\t"} {
+		for _, rep := range []string{" ", "\r", "\n", "\t"} {
 			codeString = strings.Replace(codeString, rep, "", -1)
 			test.res = strings.Replace(test.res, rep, "", -1)
 		}
@@ -184,7 +185,7 @@ func TestOutPut(t *testing.T) {
 		code := gen.GenWrapper(program)
 		output := Compile(code)
 
-		for _, rep := range []string{" ", "\n", "\t"} {
+		for _, rep := range []string{" ", "\r", "\n", "\t"} {
 			output = strings.Replace(output, rep, "", -1)
 		}
 
