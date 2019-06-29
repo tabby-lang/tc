@@ -12,6 +12,7 @@ import (
 
 	"github.com/tabby-lang/tc/ast"
 	. "github.com/tabby-lang/tc/checker"
+	"github.com/tabby-lang/tc/message"
 )
 
 var TMP_COUNT int
@@ -22,7 +23,7 @@ func write(b *bytes.Buffer, code string, args ...interface{}) {
 
 func check(err error) {
 	if err != nil {
-		panic(err.Error())
+		message.Error(err.Error())
 	}
 }
 
@@ -124,7 +125,7 @@ func genReturnStatement(node *ast.ReturnStatement, b *bytes.Buffer) string {
 
 func genFunctionStatement(node *ast.FunctionStatement, b *bytes.Buffer) string {
 	if IsBuiltin(node.Name) {
-		panic("built in function")
+		message.Error("built in function")
 	}
 
 	write(b, "%s %s(", node.Return, node.Name)
@@ -205,7 +206,7 @@ func genFunctionCall(node *ast.FunctionCall, b *bytes.Buffer) string {
 	if IsBuiltin(node.Name) {
 		sig, ok := GetMethod(node.Type, node.Name)
 		if !ok {
-			panic("no builtin function")
+			message.Error("no builtin function")
 		}
 
 		write(b, "%s %s = %s.%s(", sig.Return, tmp, args[0], node.Name)

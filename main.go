@@ -1,22 +1,29 @@
+// Copyright (c) 2019, Mark "Happy-Ferret" Bauermeister
+//
+// This software may be modified and distributed under the terms
+// of the BSD license.  See the LICENSE file for details.
+
 package main
 
 import (
 	"bytes"
 	"fmt"
-	"github.com/Lebonesco/go-compiler/ast"
-	"github.com/Lebonesco/go-compiler/checker"
-	"github.com/Lebonesco/go-compiler/gen"
-	"github.com/Lebonesco/go-compiler/lexer"
-	"github.com/Lebonesco/go-compiler/parser"
 	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
+
+	"github.com/tabby-lang/tc/ast"
+	"github.com/tabby-lang/tc/checker"
+	"github.com/tabby-lang/tc/gen"
+	"github.com/tabby-lang/tc/lexer"
+	"github.com/tabby-lang/tc/message"
+	"github.com/tabby-lang/tc/parser"
 )
 
 func check(err error) {
 	if err != nil {
-		panic(err)
+		message.Error(err)
 	}
 }
 
@@ -41,11 +48,13 @@ func Compile(code bytes.Buffer) string {
 	f.Write(code.Bytes())
 
 	var out bytes.Buffer
-	cmd1 := exec.Command("g++", "-o", "main", "./build/"+"main.cpp", "./build/Builtins.cpp")
+	cmd1 := exec.Command("g++", "-o", "main", "./build/"+"main.cpp", "-w", "./build/Builtins.cpp")
 	cmd1.Stderr = &out
 	err = cmd1.Run()
+
+	// TODO: Make sure this only catches errors, not warnings.
 	if len(out.String()) != 0 {
-		panic(fmt.Sprintf("error: %s", out.String()))
+		message.Error(fmt.Sprintf("error: %s", out.String()))
 	}
 
 	cmd := exec.Command("./main.exe")
@@ -54,7 +63,7 @@ func Compile(code bytes.Buffer) string {
 	err = cmd.Run()
 
 	if err != nil {
-		panic(err.Error())
+		message.Error(err.Error())
 	}
 
 	return outb.String()
@@ -62,7 +71,7 @@ func Compile(code bytes.Buffer) string {
 
 func main() {
 	if len(os.Args) < 2 {
-		panic("no valid file name or path provided provided for file!")
+		message.Error("No valid input file given!")
 	}
 
 	path := os.Args[1]
@@ -73,6 +82,14 @@ func main() {
 	program := Parse(string(input))
 	TypeCheck(program)
 	code := gen.GenWrapper(program)
+
+	/** TODO: Refactor into "tc run" command.
+
 	output := Compile(code)
 	fmt.Println(output)
+
+	*/
+
+	Compile(code)
+	message.Info("Code successfully compiled 😸")
 }
