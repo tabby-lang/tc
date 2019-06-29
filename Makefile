@@ -2,7 +2,7 @@ GOCMD=go
 GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get 
-GENERATOR=grammer.bnf
+GENERATOR=grammar.bnf
 GENERATE=../../../../bin/gocc
 BINARY_NAME=compiler
 
