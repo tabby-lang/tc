@@ -191,7 +191,7 @@ func evalFunctionCall(node *ast.FunctionCall) (string, error) {
 		}
 
 		if res != sig.Params[i] {
-			return "", errors.New("incorrect argument type")
+			return "", fmt.Errorf("Incorrect argument type. %s is of type %s. Required type: %s", arg.TokenLiteral(), res, sig.Params[i])
 		}
 	}
 
