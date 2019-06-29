@@ -6,11 +6,12 @@
 package main
 
 import (
+	"testing"
+
 	"github.com/tabby-lang/tc/ast"
 	"github.com/tabby-lang/tc/checker"
 	"github.com/tabby-lang/tc/lexer"
 	"github.com/tabby-lang/tc/parser"
-	"testing"
 )
 
 type Test struct {
@@ -20,36 +21,36 @@ type Test struct {
 
 func TestOperations(t *testing.T) {
 	tests := []Test{
-		{`5 + 5;`, true},
-		{`5 + "5";`, false},
-		{`5 * 5;`, true},
-		{`5 * 5 + 9;`, true},
-		{`5 < 10;`, true},
-		{`true and true;`, true},
-		{`4 and 2;`, false},
-		{`true or false;`, true}}
+		{`5 + 5`, true},
+		{`5 + "5"`, false},
+		{`5 * 5`, true},
+		{`5 * 5 + 9`, true},
+		{`5 < 10`, true},
+		{`true and true`, true},
+		{`4 and 2`, false},
+		{`true or false`, true}}
 
 	runTests(tests, t)
 }
 
 func TestIdents(t *testing.T) {
 	tests := []Test{
-		{`let x = 5;`, true},
+		{`let x = 5`, true},
 		{`
-			let x = 6;
-			let x = 8;`, false},
+			let x = 6
+			let x = 8`, false},
 		{
-			`let x = 5;
-			x = "hello";`, false},
+			`let x = 5
+			x = "hello"`, false},
 		{
-			`let y = "hey";
-			y = "cool";`, true},
+			`let y = "hey"
+			y = "cool"`, true},
 		{
-			`let x = "hello ";
-			let y = "world";
-			let z = x + y;`, true},
+			`let x = "hello "
+			let y = "world"
+			let z = x + y`, true},
 		{
-			`x = 5;`, false}}
+			`x = 5`, false}}
 
 	runTests(tests, t)
 }
@@ -58,19 +59,19 @@ func TestFunctions(t *testing.T) {
 	tests := []Test{
 		{
 			`func add(x Int, y Int) Int {
-				return x + y;
+				return x + y
 			}
 
-			let a = add(1, 3);`, true},
+			let a = add(1, 3)`, true},
 		{
 			`func add(x Int, y Int) Int {
-				return x + y;
+				return x + y
 			}
 
-			let z = add("test", 3);`, false},
+			let z = add("test", 3)`, false},
 		{
 			`func one() Int {
-				return "test";
+				return "test"
 			}`, false},
 	}
 

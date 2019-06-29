@@ -18,23 +18,23 @@ func TestAST(t *testing.T) {
 	const input = `
 			/* comment should not be scanned */
 			func add() Int {
-				return x + y;
+				return x + y
 			}
 
-			let five = "test";
-			let ten = 10;
-			ten = 4;
+			let five = "test"
+			let ten = 10
+			ten = 4
 
-			let result = 4;  
-			5 <= 10;
+			let result = 4  
+			5 <= 10
 
 			if (5 == 10) {
-				print();
+				print()
 			} else {
-				print();
+				print()
 			}
 
-			10 == 10;
+			10 == 10
 			`
 
 	out := &ast.Program{

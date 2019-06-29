@@ -12,6 +12,7 @@ import (
 	"github.com/tabby-lang/tc/gen"
 )
 
+//
 func TestGen(t *testing.T) {
 	tests := []struct {
 		src string
@@ -26,7 +27,7 @@ func TestGen(t *testing.T) {
 				int main() { return 0; }
 				`},
 		{
-			src: `5 + 5;`,
+			src: `5 + 5`,
 			res: `
 			#include <string>
 			#include <iostream>
@@ -39,7 +40,7 @@ func TestGen(t *testing.T) {
 			return 0;
 			}`},
 		{
-			src: `10 < 4;`,
+			src: `10 < 4`,
 			res: `
 			#include <string>
 			#include <iostream>
@@ -53,10 +54,10 @@ func TestGen(t *testing.T) {
 			}`},
 		{
 			src: `
-				let x = "hello ";
-				let y = "world!";
-				let z = x + y;
-				PRINT(z);
+				let x = "hello "
+				let y = "world!"
+				let z = x + y
+				PRINT(z)
 				`,
 			res: `
 				#include <string>
@@ -77,10 +78,10 @@ func TestGen(t *testing.T) {
 		{
 			src: `
 				func add(x Int, y Int) Int {
-					return x + y;
+					return x + y
 				}
 
-				let a = add(1, 3);`,
+				let a = add(1, 3)`,
 			res: `
 				#include <string>
 				#include <iostream>
@@ -98,11 +99,11 @@ func TestGen(t *testing.T) {
 				}`},
 		{
 			src: `
-				let x = 0;
+				let x = 0
 				if (true) {
-					x = 5;
+					x = 5
 				} else {
-					x = 6;
+					x = 6
 				}`,
 			res: `
 				#include <string>
@@ -145,37 +146,37 @@ func TestOutPut(t *testing.T) {
 		out string
 	}{
 		{
-			src: `let x = 5 + 5;
-				  PRINT(x);`,
+			src: `let x = 5 + 5
+				  PRINT(x)`,
 			out: "10"},
 		{
-			src: `let x = 10 > 4;
-				PRINT(x);`,
+			src: `let x = 10 > 4
+				PRINT(x)`,
 			out: "true"},
 		{
 			src: `
-				let x = "hello";
-				let y = "world!";
-				let z = x + y;
-				PRINT(z);
+				let x = "hello"
+				let y = "world!"
+				let z = x + y
+				PRINT(z)
 				`,
 			out: "helloworld!"},
 		{
 			src: `
 				func add(x Int, y Int) Int {
-					return x + y;
+					return x + y
 				}
 
-				let a = add(1, 3);
-				PRINT(a);`,
+				let a = add(1, 3)
+				PRINT(a)`,
 			out: "4"},
 		{
 			src: `
-				let x = 0;
+				let x = 0
 				if (true) {
-					x = 5;
+					x = 5
 				} else {
-					x = 6;
+					x = 6
 				}`,
 			out: ""}}
 

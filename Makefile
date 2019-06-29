@@ -3,7 +3,8 @@ GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get 
 GENERATOR=grammar.bnf
-GENERATE=../../../../bin/gocc
+# TODO: Fix LR-1 conflicts.
+GENERATE=../../../../bin/gocc -a
 BINARY_NAME=compiler
 
 
