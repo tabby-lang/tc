@@ -1,5 +1,5 @@
 func test(x Int) Int {
-	let y = 0
+	y := 0
 	if y > 5 {
 		y = 5
 	} else {

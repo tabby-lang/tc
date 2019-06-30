@@ -35,20 +35,20 @@ func TestOperations(t *testing.T) {
 
 func TestIdents(t *testing.T) {
 	tests := []Test{
-		{`let x = 5`, true},
+		{`x := 5`, true},
 		{`
-			let x = 6
-			let x = 8`, false},
+			x := 6
+			x := 8`, false},
 		{
-			`let x = 5
+			`x := 5
 			x = "hello"`, false},
 		{
-			`let y = "hey"
+			`y := "hey"
 			y = "cool"`, true},
 		{
-			`let x = "hello "
-			let y = "world"
-			let z = x + y`, true},
+			`x := "hello "
+			y := "world"
+			z := x + y`, true},
 		{
 			`x = 5`, false}}
 
@@ -62,13 +62,13 @@ func TestFunctions(t *testing.T) {
 				return x + y
 			}
 
-			let a = add(1, 3)`, true},
+			a := add(1, 3)`, true},
 		{
 			`func add(x Int, y Int) Int {
 				return x + y
 			}
 
-			let z = add("test", 3)`, false},
+			z := add("test", 3)`, false},
 		{
 			`func one() Int {
 				return "test"

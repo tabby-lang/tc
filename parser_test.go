@@ -16,10 +16,10 @@ func TestParser(t *testing.T) {
 				return x + y
 			}
 
-			let five = "test"
-			let ten = 10
+			five := "test"
+			ten := 10
 
-			let result = 4  
+			result := 4  
 			5 < 10
 
 			if (5 < 10) {

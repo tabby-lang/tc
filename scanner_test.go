@@ -19,13 +19,13 @@ func TestToken(t *testing.T) {
 	}
 	const input = `
 			/* comment should not be scanned */
-			let five = "test"
-			let ten = 10
-			let add = fn(x, y) {
+			five := "test"
+			ten := 10
+			add := fn(x, y) {
 				x + y
 			}
 
-			let result = add(five, ten)  
+			result := add(five, ten)  
 			5 < 10 > 5
 
 			if (5 < 10) {
@@ -39,17 +39,14 @@ func TestToken(t *testing.T) {
 			`
 
 	tests := []Test{
-		{token.TokMap.Type("let"), "let"},
 		{token.TokMap.Type("ident"), "five"},
-		{token.TokMap.Type("assign"), "="},
+		{token.TokMap.Type("decl"), ":="},
 		{token.TokMap.Type("string_literal"), "\"test\""},
-		{token.TokMap.Type("let"), "let"},
 		{token.TokMap.Type("ident"), "ten"},
-		{token.TokMap.Type("assign"), "="},
+		{token.TokMap.Type("decl"), ":="},
 		{token.TokMap.Type("int"), "10"},
-		{token.TokMap.Type("let"), "let"},
 		{token.TokMap.Type("ident"), "add"},
-		{token.TokMap.Type("assign"), "="},
+		{token.TokMap.Type("decl"), ":="},
 		{token.TokMap.Type("ident"), "fn"},
 		{token.TokMap.Type("lparen"), "("},
 		{token.TokMap.Type("ident"), "x"},
@@ -61,9 +58,8 @@ func TestToken(t *testing.T) {
 		{token.TokMap.Type("add"), "+"},
 		{token.TokMap.Type("ident"), "y"},
 		{token.TokMap.Type("rbrace"), "}"},
-		{token.TokMap.Type("let"), "let"},
 		{token.TokMap.Type("ident"), "result"},
-		{token.TokMap.Type("assign"), "="},
+		{token.TokMap.Type("decl"), ":="},
 		{token.TokMap.Type("ident"), "add"},
 		{token.TokMap.Type("lparen"), "("},
 		{token.TokMap.Type("ident"), "five"},

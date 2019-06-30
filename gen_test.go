@@ -54,9 +54,9 @@ func TestGen(t *testing.T) {
 			}`},
 		{
 			src: `
-				let x = "hello "
-				let y = "world!"
-				let z = x + y
+				x := "hello "
+				y := "world!"
+				z := x + y
 				println(z)
 				`,
 			res: `
@@ -81,7 +81,7 @@ func TestGen(t *testing.T) {
 					return x + y
 				}
 
-				let a = add(1, 3)`,
+				a := add(1, 3)`,
 			res: `
 				#include <string>
 				#include <iostream>
@@ -99,7 +99,7 @@ func TestGen(t *testing.T) {
 				}`},
 		{
 			src: `
-				let x = 0
+				x := 0
 				if (true) {
 					x = 5
 				} else {
@@ -146,18 +146,18 @@ func TestOutPut(t *testing.T) {
 		out string
 	}{
 		{
-			src: `let x = 5 + 5
+			src: `x := 5 + 5
 				  println(x)`,
 			out: "10"},
 		{
-			src: `let x = 10 > 4
+			src: `x := 10 > 4
 				println(x)`,
 			out: "true"},
 		{
 			src: `
-				let x = "hello"
-				let y = "world!"
-				let z = x + y
+				x := "hello"
+				y := "world!"
+				z := x + y
 				println(z)
 				`,
 			out: "helloworld!"},
@@ -167,12 +167,12 @@ func TestOutPut(t *testing.T) {
 					return x + y
 				}
 
-				let a = add(1, 3)
+				a := add(1, 3)
 				println(a)`,
 			out: "4"},
 		{
 			src: `
-				let x = 0
+				x := 0
 				if (true) {
 					x = 5
 				} else {

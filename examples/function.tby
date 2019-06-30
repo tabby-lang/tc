@@ -6,7 +6,7 @@ func hello(name String) String {
     return "hello" + " " + name
 }
 
-let num = add(1, 2)
-let phrase = hello("Jeff")
+num := add(1, 2)
+phrase := hello("Jeff")
 println(phrase)
 println(num)
