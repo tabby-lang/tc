@@ -58,7 +58,7 @@ func TestToken(t *testing.T) {
 		{token.TokMap.Type("rparen"), ")"},
 		{token.TokMap.Type("lbrace"), "{"},
 		{token.TokMap.Type("ident"), "x"},
-		{token.TokMap.Type("plus"), "+"},
+		{token.TokMap.Type("add"), "+"},
 		{token.TokMap.Type("ident"), "y"},
 		{token.TokMap.Type("rbrace"), "}"},
 		{token.TokMap.Type("let"), "let"},

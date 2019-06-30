@@ -35,7 +35,7 @@ func TestGen(t *testing.T) {
 			int main() {
 			Int tmp_1 = Int(5);
 			Int tmp_2 = Int(5);
-			Int tmp_3 = tmp_1.PLUS(tmp_2);
+			Int tmp_3 = tmp_1.ADD(tmp_2);
 			tmp_3;
 			return 0;
 			}`},
@@ -68,7 +68,7 @@ func TestGen(t *testing.T) {
 				String x = tmp_1;
 				String tmp_2 = String("world!");
 				String y = tmp_2;
-				String tmp_3 = x.PLUS(y);
+				String tmp_3 = x.ADD(y);
 				String z = tmp_3;
 				Nothing tmp_4 = z.PRINT();
 				tmp_4;
@@ -87,7 +87,7 @@ func TestGen(t *testing.T) {
 				#include <iostream>
 				#include "Builtins.cpp"
 				Int add(Int y, Int x) {
-					Int tmp_1 = x.PLUS(y);
+					Int tmp_1 = x.ADD(y);
 					return tmp_1;
 				}
 				int main() {

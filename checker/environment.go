@@ -7,12 +7,13 @@ package checker
 
 // operations
 const (
-	PLUS  = "PLUS"
+	ADD   = "ADD"
 	EQUAL = "EQ"
 	LT    = "LT"
 	GT    = "GT"
-	MINUS = "MINUS"
-	TIMES = "TIMES"
+	SUB   = "SUB"
+	MUL   = "MUL"
+	DIV   = "DIV"
 	AND   = "AND"
 	OR    = "OR"
 	PRINT = "PRINT"
@@ -36,15 +37,16 @@ type Methods map[string]Signature
 // type methods
 var TypeTable = map[string]Methods{
 	INT_TYPE: {
-		PLUS:  {INT_TYPE, []string{INT_TYPE}},
-		MINUS: {INT_TYPE, []string{INT_TYPE}},
-		TIMES: {INT_TYPE, []string{INT_TYPE}},
+		ADD:   {INT_TYPE, []string{INT_TYPE}},
+		SUB:   {INT_TYPE, []string{INT_TYPE}},
+		MUL:   {INT_TYPE, []string{INT_TYPE}},
+		DIV:   {INT_TYPE, []string{INT_TYPE}},
 		LT:    {BOOL_TYPE, []string{INT_TYPE}},
 		GT:    {BOOL_TYPE, []string{INT_TYPE}},
 		EQUAL: {BOOL_TYPE, []string{INT_TYPE}},
 		PRINT: {NOTHING_TYPE, []string{}}},
 	STRING_TYPE: {
-		PLUS:  {STRING_TYPE, []string{STRING_TYPE}},
+		ADD:   {STRING_TYPE, []string{STRING_TYPE}},
 		PRINT: {NOTHING_TYPE, []string{}}},
 	BOOL_TYPE: {
 		AND:   {BOOL_TYPE, []string{BOOL_TYPE}},

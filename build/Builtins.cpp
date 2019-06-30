@@ -51,7 +51,7 @@ public:
 	String(string x) {
 		val = x;
 	}
-	String PLUS(String str) {
+	String ADD(String str) {
 		return String(val + str.val);
 	}
 
@@ -73,16 +73,20 @@ public:
 		valInt = x;
 	}
 
-	Int PLUS(Int num) {
+	Int ADD(Int num) {
 		return Int(valInt + num.valInt);
 	}
 
-	Int MINUS(Int num) {
+	Int SUB(Int num) {
 		return Int(valInt - num.valInt);
 	}
 
-	Int TIMES(Int num) {
+	Int MUL(Int num) {
 		return Int(valInt * num.valInt);
+	}
+
+	Int DIV(Int num) {
+		return Int(valInt / num.valInt);
 	}
 
 	Bool GT(Int num) {
