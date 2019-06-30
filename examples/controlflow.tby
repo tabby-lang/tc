@@ -8,4 +8,4 @@ func test(x Int) Int {
 	return y
 }
 
-PRINT(test(5))
+println(test(5))

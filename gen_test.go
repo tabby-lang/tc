@@ -57,7 +57,7 @@ func TestGen(t *testing.T) {
 				let x = "hello "
 				let y = "world!"
 				let z = x + y
-				PRINT(z)
+				println(z)
 				`,
 			res: `
 				#include <string>
@@ -70,7 +70,7 @@ func TestGen(t *testing.T) {
 				String y = tmp_2;
 				String tmp_3 = x.ADD(y);
 				String z = tmp_3;
-				Nothing tmp_4 = z.PRINT();
+				Nothing tmp_4 = z.println();
 				tmp_4;
 				return 0;
 				}
@@ -147,18 +147,18 @@ func TestOutPut(t *testing.T) {
 	}{
 		{
 			src: `let x = 5 + 5
-				  PRINT(x)`,
+				  println(x)`,
 			out: "10"},
 		{
 			src: `let x = 10 > 4
-				PRINT(x)`,
+				println(x)`,
 			out: "true"},
 		{
 			src: `
 				let x = "hello"
 				let y = "world!"
 				let z = x + y
-				PRINT(z)
+				println(z)
 				`,
 			out: "helloworld!"},
 		{
@@ -168,7 +168,7 @@ func TestOutPut(t *testing.T) {
 				}
 
 				let a = add(1, 3)
-				PRINT(a)`,
+				println(a)`,
 			out: "4"},
 		{
 			src: `

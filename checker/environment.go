@@ -7,16 +7,17 @@ package checker
 
 // operations
 const (
-	ADD   = "ADD"
-	EQUAL = "EQ"
-	LT    = "LT"
-	GT    = "GT"
-	SUB   = "SUB"
-	MUL   = "MUL"
-	DIV   = "DIV"
-	AND   = "AND"
-	OR    = "OR"
-	PRINT = "PRINT"
+	ADD     = "ADD"
+	EQUAL   = "EQ"
+	LT      = "LT"
+	GT      = "GT"
+	SUB     = "SUB"
+	MUL     = "MUL"
+	DIV     = "DIV"
+	AND     = "AND"
+	OR      = "OR"
+	println = "println"
+	print   = "print"
 )
 
 // variable types
@@ -37,21 +38,25 @@ type Methods map[string]Signature
 // type methods
 var TypeTable = map[string]Methods{
 	INT_TYPE: {
-		ADD:   {INT_TYPE, []string{INT_TYPE}},
-		SUB:   {INT_TYPE, []string{INT_TYPE}},
-		MUL:   {INT_TYPE, []string{INT_TYPE}},
-		DIV:   {INT_TYPE, []string{INT_TYPE}},
-		LT:    {BOOL_TYPE, []string{INT_TYPE}},
-		GT:    {BOOL_TYPE, []string{INT_TYPE}},
-		EQUAL: {BOOL_TYPE, []string{INT_TYPE}},
-		PRINT: {NOTHING_TYPE, []string{}}},
+		ADD:     {INT_TYPE, []string{INT_TYPE}},
+		SUB:     {INT_TYPE, []string{INT_TYPE}},
+		MUL:     {INT_TYPE, []string{INT_TYPE}},
+		DIV:     {INT_TYPE, []string{INT_TYPE}},
+		LT:      {BOOL_TYPE, []string{INT_TYPE}},
+		GT:      {BOOL_TYPE, []string{INT_TYPE}},
+		EQUAL:   {BOOL_TYPE, []string{INT_TYPE}},
+		println: {NOTHING_TYPE, []string{}},
+		print:   {NOTHING_TYPE, []string{}}},
 	STRING_TYPE: {
-		ADD:   {STRING_TYPE, []string{STRING_TYPE}},
-		PRINT: {NOTHING_TYPE, []string{}}},
+		ADD:     {STRING_TYPE, []string{STRING_TYPE}},
+		println: {NOTHING_TYPE, []string{}},
+		print:   {NOTHING_TYPE, []string{}}},
 	BOOL_TYPE: {
-		AND:   {BOOL_TYPE, []string{BOOL_TYPE}},
-		OR:    {BOOL_TYPE, []string{BOOL_TYPE}},
-		PRINT: {NOTHING_TYPE, []string{}}}}
+		AND:     {BOOL_TYPE, []string{BOOL_TYPE}},
+		OR:      {BOOL_TYPE, []string{BOOL_TYPE}},
+		println: {NOTHING_TYPE, []string{}},
+		print:   {NOTHING_TYPE, []string{}}},
+}
 
 type Environment struct {
 	Vals  map[string]string    // map identifier to type
@@ -62,7 +67,7 @@ type Environment struct {
 var env Environment // set global
 
 func IsBuiltin(name string) bool {
-	return name == "PRINT"
+	return name == "println" || name == "print"
 }
 
 func NewEnvironment() Environment {

@@ -15,8 +15,12 @@ class Nothing {
 class Base {
 public:
 	string val;
-	Nothing PRINT(void) {
-		cout << val << endl;
+	Nothing print(void) {
+		cout << val;
+	}
+	Nothing println(void) {
+		Base::print();
+		cout << endl;
 	}
 };
 
