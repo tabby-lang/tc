@@ -8,7 +8,7 @@ _digit : '0'-'9' ;
 _alpha : _letter | _digit ;
 
 string_literal : '"' {_alpha | ' ' | '!' | '?' }'"' ;
-int : '0' | '1'-'9' {_digit} ;
+int : '0' | [ '-' ] '1'-'9' {_digit} ;
 
 /* keywords */
 func : 'f' 'u' 'n' 'c' ;
