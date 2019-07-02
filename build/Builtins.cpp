@@ -15,10 +15,10 @@ class Nothing {
 class Base {
 public:
 	string val;
-	Nothing print(void) {
+	Nothing print(void) const {
 		cout << val;
 	}
-	Nothing println(void) {
+	Nothing println(void) const {
 		Base::print();
 		cout << endl;
 	}
@@ -71,8 +71,8 @@ public:
 // Int Class
 class Int: public Base {
 public:
-	int valInt;
-	Int(int x) {
+	int32_t valInt;
+	Int(int32_t x) {
 		val = to_string(x);
 		valInt = x;
 	}

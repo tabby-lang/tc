@@ -36,6 +36,8 @@ func checker(node ast.Node) (string, error) {
 		return evalAssignStatement(node)
 	case *ast.InitStatement:
 		return evalInitStatement(node)
+	case *ast.ConstStatement:
+		return evalConstStatement(node)
 	case *ast.FunctionStatement:
 		return evalFunctionStatement(node)
 	// Expressions
@@ -113,7 +115,21 @@ func evalExpressionStatement(node *ast.ExpressionStatement) (string, error) {
 
 func evalInitStatement(node *ast.InitStatement) (string, error) {
 	if env.IdentExist(node.Location) {
-		return "", errors.New("ident already exist")
+		return "", errors.New(node.Location + " already declared")
+	}
+
+	right, err := checker(node.Expr)
+	if err != nil {
+		return "", err
+	}
+
+	env.Set(node.Location, right) // set ident type
+	return "", nil
+}
+
+func evalConstStatement(node *ast.ConstStatement) (string, error) {
+	if env.IdentExist(node.Location) {
+		return "", errors.New(node.Location + " already declared")
 	}
 
 	right, err := checker(node.Expr)

@@ -6,6 +6,7 @@
 package message
 
 import (
+	"fmt"
 	"os"
 
 	colorable "github.com/mattn/go-colorable"
@@ -28,6 +29,13 @@ func init() {
 // Error throws an error and aborts the running process.
 func Error(v interface{}) {
 	logrus.Error(v)
+	os.Exit(1)
+}
+
+// Errorf formats an error message according to a format specifier,
+// throws the error and aborts the running process.
+func Errorf(format string, v ...interface{}) {
+	logrus.Error(fmt.Sprintf(format, v...))
 	os.Exit(1)
 }
 

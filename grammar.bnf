@@ -8,11 +8,12 @@ _digit : '0'-'9' ;
 _alpha : _letter | _digit ;
 
 string_literal : '"' {_alpha | ' ' | '!' | '?' }'"' ;
-int : '0' | '1'-'9' {_digit} ;
+int : '0' | ['-'] '1'-'9' {_digit} ;
 
 /* keywords */
 func : 'f' 'u' 'n' 'c' ;
 decl : ':' '=' ;
+const : 'c' 'o' 'n' 's' 't' ;
 if : 'i' 'f' ;
 else : 'e' 'l' 's' 'e' ;
 return : 'r' 'e' 't' 'u' 'r' 'n' ;
@@ -77,6 +78,7 @@ Function
   : if Expression StatementBlock IfStatement << ast.NewIfStatement($1, $2, $3) >>
   | ident assign Expression << ast.NewAssignStatement($0, $2) >>
   | ident decl Expression << ast.NewIdentInit($0, $2) >>
+  | const ident assign Expression << ast.NewConst($1, $3) >>
   | Expression << ast.NewExpressionStatement($0) >>
   | return Expression << ast.NewReturnStatement($1) >>
   ;

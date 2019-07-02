@@ -2,11 +2,5 @@ func add(a Int, b Int) Int {
     return a + b
 }
 
-func hello(name String) String {
-    return "hello" + " " + name
-}
-
-num := add(1, 2)
-phrase := hello("Jeff")
-println(phrase)
+num := add(-2147483648, 2)
 println(num)

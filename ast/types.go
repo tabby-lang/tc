@@ -12,6 +12,7 @@ type Attrib interface{}
 
 // root node
 type Program struct {
+	Constants  []Statement `json:"constants"`
 	Statements []Statement `json:"statements"`
 	Functions  []Statement `json:"functions"`
 }
@@ -82,6 +83,12 @@ type ExpressionStatement struct {
 }
 
 type InitStatement struct {
+	Token    *token.Token `json:"-"`
+	Expr     Expression   `json:"expression"`
+	Location string       `json:"location"`
+}
+
+type ConstStatement struct {
 	Token    *token.Token `json:"-"`
 	Expr     Expression   `json:"expression"`
 	Location string       `json:"location"`

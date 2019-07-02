@@ -58,6 +58,8 @@ func gen(node ast.Node, b *bytes.Buffer) string {
 		return genAssignStatement(node, b)
 	case *ast.InitStatement:
 		return genInitStatement(node, b)
+	case *ast.ConstStatement:
+		return genConstStatement(node, b)
 	// // Expressions
 	case *ast.InfixExpression:
 		return genInfixExpression(node, b)
@@ -114,6 +116,13 @@ func genInitStatement(node *ast.InitStatement, b *bytes.Buffer) string {
 	right := gen(node.Expr, b)
 	kind, _ := GetIdentType(node.Location)
 	write(b, "%s %s = %s;\n", kind, node.Location, right)
+	return ""
+}
+
+func genConstStatement(node *ast.ConstStatement, b *bytes.Buffer) string {
+	right := gen(node.Expr, b)
+	kind, _ := GetIdentType(node.Location)
+	write(b, "const %s %s = %s;\n", kind, node.Location, right)
 	return ""
 }
 

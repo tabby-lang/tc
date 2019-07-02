@@ -7,6 +7,9 @@ package ast
 
 import (
 	"fmt"
+	"strconv"
+
+	"github.com/tabby-lang/tc/message"
 	"github.com/tabby-lang/tc/token"
 )
 
@@ -32,6 +35,9 @@ func (bs BlockStatement) TokenLiteral() string { return "BlockStatement" }
 
 func (is InitStatement) statementNode()       {}
 func (is InitStatement) TokenLiteral() string { return "InitStatement" }
+
+func (is ConstStatement) statementNode()       {}
+func (is ConstStatement) TokenLiteral() string { return "ConstStatement" }
 
 func (fs FunctionStatement) statementNode()       {}
 func (fs FunctionStatement) TokenLiteral() string { return "FunctionStatement" }
@@ -89,6 +95,7 @@ func AppendStatement(stmtList, stmt Attrib) ([]Statement, error) {
 
 func NewAssignStatement(left, right Attrib) (Statement, error) {
 	l, ok := left.(*token.Token)
+	fmt.Println(l.Type)
 	if !ok {
 		return nil, Error("NewAssignStatement", "Identifier", "left", left)
 	}
@@ -190,6 +197,26 @@ func NewIntegerLiteral(integer Attrib) (Expression, error) {
 		return nil, Error("NewIntegerLiteral", "*token.Token", "integer", integer)
 	}
 
+	// Check for under-/overflow here
+	// if string(intLit.Lit) <= xxx ...
+	maxInt := 0x7fffffff
+	minInt := -0x80000000
+	number, _ := strconv.Atoi(string(intLit.Lit))
+	// println(fmt.Sprintf("%s(%d)", integer.(*token.Token), intLit.Type))
+
+	// t := reflect.ValueOf(token.TokMap)
+	// v := t.Field(1)
+	// fmt.Println(v)
+
+	// t := reflect.ValueOf(token.TokMap)
+	// v := t.FieldByName("idMap").MapIndex(reflect.ValueOf("int"))
+	// fmt.Println(v)
+	if number > maxInt || number < minInt {
+		// return nil, fmt.Errorf("Arithmetic overflow detected! %v overflows %v", number, intLit)
+		// message.Error(fmt.Sprintf("Arithmetic overflow detected! %v overflows %v", number, intLit))
+		message.Errorf("Arithmetic overflow detected! %v overflows (Line: %v, Column: %v)", number, intLit.Pos.Line, intLit.Pos.Column)
+	}
+
 	return &IntegerLiteral{Token: intLit, Value: string(intLit.Lit)}, nil
 }
 
@@ -204,6 +231,15 @@ func NewIdentInit(ident, expr Attrib) (Statement, error) {
 	}
 
 	return &InitStatement{Location: string(ident.(*token.Token).Lit), Token: ident.(*token.Token), Expr: e}, nil
+}
+
+func NewConst(ident, expr Attrib) (Statement, error) {
+	e, ok := expr.(Expression)
+	if !ok {
+		return nil, Error("NewConst", "Expression", "expr", expr)
+	}
+
+	return &ConstStatement{Location: string(ident.(*token.Token).Lit), Token: ident.(*token.Token), Expr: e}, nil
 }
 
 func NewIdentExpression(ident Attrib) (*Identifier, error) {
