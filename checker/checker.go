@@ -208,6 +208,11 @@ func evalBoolean(node *ast.Boolean) (string, error) {
 }
 
 func evalInteger(node *ast.IntegerLiteral) (string, error) {
+	number, _ := node.TypedValue()
+	err := CheckOverflow(number, node.Token)
+	if err != nil {
+		return "", err
+	}
 	return INT_TYPE, nil
 }
 

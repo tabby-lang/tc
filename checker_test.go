@@ -36,6 +36,7 @@ func TestOperations(t *testing.T) {
 func TestIdents(t *testing.T) {
 	tests := []Test{
 		{`x := 5`, true},
+		{`x := -2147483649`, false}, // Integer overflow
 		{`
 			x := 6
 			x := 8`, false},

@@ -1,0 +1,60 @@
+
+Grammar:
+  ☐ Global consts
+  ☐ Make variables local-only and immutable by default.
+    ☐ Add ~ (tilde) modifier to signify an object's explicit mutability.
+  ☐ float
+  ☐ decimal
+  ☐ rune? char?
+  ☐ custom, user-defined types
+  ☐ Decouple IR type representation from language
+    ☐ `Int` should be `int` inside a .tby file, and be translated to "T_INT" or "TABBY_INT" (or "TabbyLib::IntType"?) inside the IR.
+  ☐ Import statement (`import`? `using`? Differing invocations for C/C++ VS Tabby packages?)
+  ☐ Export operation => `#{name of function}`
+  ☐ `free()`
+  ☐ `panic()`
+  ☐ Arrays/Slices
+  ☐ Structs
+  ☐ Void functions
+  ☐ Variadic functions
+  ☐ Interfaces
+  ☐ Macros and build directives
+
+Compiler frontend:
+  ☐ Add flags
+  ☐ `$TABBYPATH`
+  ☐ Check OS for Windows => If Windows, append ".exe" to filename.
+  ☐ Base object filename on input filename.
+  ☐ Rename, since `tc` is already reserved under GNU/Linux.
+  ☐ `tlc run` to compile & run (like `go run`) application
+  ☐ --shared-object flag
+  ☐ `$TCC` (Tabby C Compiler) to pick binary/path to alternative C++ compiler (Clang or MSVC).
+  ☐ Rework Makefile
+    ☐ gocc should be in the GOPATH and installed, so no reason for a relative path to it.
+    ☐ Don't just run the compiler, build it too!
+
+Documentation:
+  ☐ Introductory blog post
+  ☐ Wiki
+  ☐ Github Page
+
+TabbyLib:
+  ☐ Graphics/audio examples
+  ☐ OpenGL backed font rendering
+
+Type Checker & AST:
+  ✔ CheckOverflow() function for numerical types @started(19-07-03 00:02) @done(19-07-03 01:14) @lasted(1h12m42s)
+    ☐ Create `bounds` package containing tables with max/min values for all types.
+      ✔ int @done(19-07-03 01:02)
+      ☐ int32
+      ☐ float32
+      ☐ float64
+    ☐ Write example/test.
+  ☐ TypedValue() methods to easily convert a string token representation of a given literal to a Go type value
+    ✔ IntegerLiteral => int64 @started(19-07-03 17:25) @done(19-07-03 17:51) @lasted(26m13s)
+  ☐ Improve `message` package and enforce more informative messages throughout the board.
+
+Youtube:
+  ☐ Introduction
+  ☐ Implementing mutable/immutable variables
+  ☐ Memory management
